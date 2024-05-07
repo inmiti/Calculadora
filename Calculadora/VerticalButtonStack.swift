@@ -27,12 +27,12 @@ struct VerticalButtonStack: View {
                     if model.isDoubleWidth {
                         Rectangle()
                             .foregroundColor(model.backgroundColor)
-                        overlay(
-                            Text(model.title)
-                                .font(.largeTitle)
-                                .offset(x: width * 0.22 * 0.5)
-                        )
-                        .frame(width: width * 2 * 0.22,
+                            .overlay(
+                                Text(model.title)
+                                    .font(.largeTitle)
+                                    .offset(x: width * 0.22 * 0.5)
+                            )
+                            .frame(width: width * 2 * 0.22,
                                height: width * 0.22)
                         
                     } else {
@@ -54,10 +54,10 @@ struct VerticalButtonStack: View {
 
 struct VerticalButtonStack_Previews: PreviewProvider {
     static var previews: some View {
-//        VerticalButtonStack(data: Matrix.firstSectionData,
-//                            columns: Matrix.firstSectionGrid(390 * 0.25),
-//                            width: 390)
-//            .previewLayout(.sizeThatFits)
+        VerticalButtonStack(data: Matrix.firstSectionData,
+                            columns: Matrix.firstSectionGrid(390 * 0.25),
+                            width: 390)
+            .previewLayout(.sizeThatFits)
         VerticalButtonStack(data: Matrix.secondSectionData,
                             columns: Matrix.secondSectionGrid(390 * 0.25),
                             width: 390)
