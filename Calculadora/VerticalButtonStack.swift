@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct VerticalButtonStack: View {
+    
+    @ObservedObject var viewModel: ViewModel
+    
     let data: [KeyboardButton]
     let columns: [GridItem]
     let width: CGFloat
     
-    init(data: [KeyboardButton], columns: [GridItem], width: CGFloat) {
+    init(viewModel: ViewModel,
+         data: [KeyboardButton],
+         columns: [GridItem],
+         width: CGFloat) {
+        self.viewModel = viewModel
         self.data = data
         self.columns = columns
         self.width = width
@@ -23,7 +30,9 @@ struct VerticalButtonStack: View {
                   spacing: 12,
                   content: {
             ForEach(data, id: \.self) { model in
-                Button(action: {}, label: {
+                Button(action: {
+                    viewModel.logic(key: model)
+                }, label: {
                     if model.isDoubleWidth {
                         Rectangle()
                             .foregroundColor(model.backgroundColor)
@@ -54,11 +63,13 @@ struct VerticalButtonStack: View {
 
 struct VerticalButtonStack_Previews: PreviewProvider {
     static var previews: some View {
-        VerticalButtonStack(data: Matrix.firstSectionData,
+        VerticalButtonStack(viewModel: ViewModel(),
+                            data: Matrix.firstSectionData,
                             columns: Matrix.firstSectionGrid(390 * 0.25),
                             width: 390)
             .previewLayout(.sizeThatFits)
-        VerticalButtonStack(data: Matrix.secondSectionData,
+        VerticalButtonStack(viewModel: ViewModel(),
+                            data: Matrix.secondSectionData,
                             columns: Matrix.secondSectionGrid(390 * 0.25),
                             width: 390)
             .previewLayout(.sizeThatFits)
